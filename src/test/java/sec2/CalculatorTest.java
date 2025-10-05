@@ -1,9 +1,6 @@
 package sec2;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.Duration;
 
@@ -11,6 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
     private Calculator calculator;
+    @BeforeAll
+    static void beforeAllTests(){
+        System.out.println("全テストの初期化を行う");
+    }
+
+    @AfterAll
+    static  void afterAllTests(){
+        System.out.println("全テストの終了処理を行う");
+    }
 
     @BeforeEach
     void setup(){
