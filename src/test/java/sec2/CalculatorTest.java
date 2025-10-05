@@ -34,4 +34,14 @@ class CalculatorTest {
         assertTimeout(Duration.ofMillis(100),
                 () -> calculator.multiply(2, 3));
     }
+    @Test
+    void testWithAsswerALL(){
+        Calculator calculator = new Calculator();
+        assertAll(
+                () -> assertEquals(7, calculator.add(3, 4),"足し算"),
+                () -> assertEquals(2, calculator.subtract(5, 3),"引き算"),
+                () -> assertEquals(6, calculator.multiply(2, 3),"掛け算"),
+                () -> assertEquals(5, calculator.divide(10, 2),"割り算")
+        );
+    }
 }
