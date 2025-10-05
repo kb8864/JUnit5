@@ -2,6 +2,8 @@ package sec2;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
@@ -23,5 +25,13 @@ class CalculatorTest {
                 () -> calculator.divide(2, 0));
 
         assertEquals("0で割ることはできません", e.getMessage());
+    }
+
+    @Test
+    void completesQuickly(){
+        Calculator calculator = new Calculator();
+
+        assertTimeout(Duration.ofMillis(100),
+                () -> calculator.multiply(2, 3));
     }
 }
