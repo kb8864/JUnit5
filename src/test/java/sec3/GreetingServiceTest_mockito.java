@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,6 +33,15 @@ class GreetingServiceTest_mockito {
     //検証
     assertEquals("昼", mockTimeProvider.getTimeLabelForName("山田"));
     //山田以外にはnullが帰ってくる
-        assertEquals(null, mockTimeProvider.getTimeLabelForName("田中"));
+         assertEquals(null, mockTimeProvider.getTimeLabelForName("田中"));
+    }
+
+    @Test
+    void 任意の値で昼を返す(){
+        doReturn("昼").when(mockTimeProvider).getTimeLabelForName(anyString());
+        //検証
+        assertEquals("昼", mockTimeProvider.getTimeLabelForName("山田"));
+        assertEquals("昼", mockTimeProvider.getTimeLabelForName("田中"));
+
     }
 }
