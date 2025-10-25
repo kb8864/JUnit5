@@ -2,6 +2,7 @@ package exercises;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.time.Duration;
 
 class SimpleCalculatorTest {
     SimpleCalculator calculator = new SimpleCalculator();
@@ -34,5 +35,17 @@ class SimpleCalculatorTest {
         assertEquals(4 , result);
     }
 
+    @DisplayName("divide(10, 0) を呼び出すと ArithmeticException がスローされる")
+    @Test
+    void testDivideByZero(){
+    assertThrows(ArithmeticException.class, () ->calculator.divide(10, 0));
+    }
+
+    @DisplayName("テストが成功したらlongProcess() メソッドが 100ミリ秒以内 に完了")
+    @Test
+//    「中の処理がこの時間内に終わるか」を確認するのはassertTimeout
+    void testLongProcessWithinTime(){
+        assertTimeout(Duration.ofMillis(100), ()->calculator.longProcess());
+    }
 
 }
