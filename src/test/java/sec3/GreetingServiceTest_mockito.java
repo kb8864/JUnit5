@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 
 @ExtendWith(MockitoExtension.class)
 class GreetingServiceTest_mockito {
@@ -42,6 +43,13 @@ class GreetingServiceTest_mockito {
         //検証
         assertEquals("昼", mockTimeProvider.getTimeLabelForName("山田"));
         assertEquals("昼", mockTimeProvider.getTimeLabelForName("田中"));
-
     }
+
+    @Test
+    void 特定の名前を例外でスローする(){
+        doThrow(new RuntimeException("通知失敗の例外エラー"))
+                .when(mockTimeProvider).notifyUser(anyString());
+        assertThrows(RuntimeException.class, ()-> mockTimeProvider.notifyUser("田中"));
+    }
+
 }
