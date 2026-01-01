@@ -32,7 +32,7 @@ class UserDaoTest {
     private static final String DB_PASS = "postgres";
     @Test
     @DataSet("datasets/users.yml") //テストメソッド実行前に.ymlファイルに記載されたテストデータを自動的に投入する
-    void  testFinrAllUsers() throws  Exception{
+    void  testFindAllUsers() throws  Exception{
         try(Connection conn = DriverManager.getConnection(DB_URL, DB_USER,DB_PASS)){
             UserDao userDao = new UserDao(conn);
 
