@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,5 +53,15 @@ class UserDaoTest {
 
     }
 
+    @Test
+    @DataSet("datasets/users.yml")
+    //特定の条件でメールを１件取得できるか確認するテスト
+    void  testFindByEmail_existingEmail() throws  Exception{
+        try(Connection conn = DriverManager.getConnection(DB_URL, DB_USER,DB_PASS)) {
+            UserDao userDao = new UserDao(conn);
 
-}
+            Optional<User> userOpt = userDao.findByEmail("suzuki.taro@example.com");
+            assertTrue(userOpt.isPresent());
+            }
+        }
+    }
