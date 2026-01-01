@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,4 +81,20 @@ class UserDaoTest {
 
         }
 
+    @Test
+    @DataSet("datasets/users_before_add.yml")
+    void testFindByEmail_performance() throws  Exception {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS)) {
+            UserDao userDao = new UserDao(conn);
+
+            assertTimeout(Duration.ofMillis(300), () -> {
+                        Optional<User> userOpt = userDao.findByEmail("suzuki.taro@example.com");
+                        assertTrue(userOpt.isPresent());
+                        assertEquals("suzuki_taro", userOpt.get().getUsername());
+                    }
+
+            );
+        }
+
     }
+}
