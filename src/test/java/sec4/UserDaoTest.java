@@ -3,6 +3,7 @@ package sec4;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.junit5.DBUnitExtension;
 import com.github.database.rider.junit5.api.DBRider;
 import exercises.sec3.UserService;
@@ -64,4 +65,19 @@ class UserDaoTest {
             assertTrue(userOpt.isPresent());
             }
         }
+
+    @Test
+    @DataSet("datasets/users_before_add.yml")
+    @ExpectedDataSet(value = "datasets/users_after_add.yml", ignoreCols = "id")
+    void testAddUser() throws  Exception{
+        try(Connection conn = DriverManager.getConnection(DB_URL, DB_USER,DB_PASS)) {
+            UserDao userDao = new UserDao(conn);
+
+            User newUser = new User("shimizu_naoki", "shimizu.naoki@example.com",26);
+            userDao.add(newUser);
+        }
+
+
+        }
+
     }
