@@ -1,0 +1,13 @@
+users:
+  - id: 0
+    username: suzuki_taro
+    email: suzuki.taro@example.com
+    age: 28
+  - id: 1
+    username: tanaka_hanako
+    email: tanaka.hanako@example.com
+    age: 25
+  - id: 2
+    username: yamada_ichiro
+    email: yamada.ichiro@example.com
+    age: 35
